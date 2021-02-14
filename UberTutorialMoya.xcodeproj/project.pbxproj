@@ -9,23 +9,29 @@
 /* Begin PBXBuildFile section */
 		256C4F2925D7C1CB0044AEC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F2825D7C1CB0044AEC0 /* AppDelegate.swift */; };
 		256C4F2B25D7C1CB0044AEC0 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F2A25D7C1CB0044AEC0 /* SceneDelegate.swift */; };
-		256C4F2D25D7C1CB0044AEC0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F2C25D7C1CB0044AEC0 /* ViewController.swift */; };
 		256C4F3025D7C1CB0044AEC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 256C4F2E25D7C1CB0044AEC0 /* Main.storyboard */; };
 		256C4F3325D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F3125D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodeld */; };
 		256C4F3525D7C1CC0044AEC0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 256C4F3425D7C1CC0044AEC0 /* Assets.xcassets */; };
 		256C4F3825D7C1CC0044AEC0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 256C4F3625D7C1CC0044AEC0 /* LaunchScreen.storyboard */; };
+		256C4F4825D7C23C0044AEC0 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F4725D7C23C0044AEC0 /* LoginController.swift */; };
+		256C4F4B25D7C8CB0044AEC0 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F4A25D7C8CB0044AEC0 /* Extensions.swift */; };
+		256C4F5F25D7DEDF0044AEC0 /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F5E25D7DEDF0044AEC0 /* SignUpController.swift */; };
+		256C4F6225D8C1070044AEC0 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F6125D8C1070044AEC0 /* AuthButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		256C4F2525D7C1CB0044AEC0 /* UberTutorialMoya.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UberTutorialMoya.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		256C4F2825D7C1CB0044AEC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		256C4F2A25D7C1CB0044AEC0 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		256C4F2C25D7C1CB0044AEC0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		256C4F2F25D7C1CB0044AEC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		256C4F3225D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UberTutorialMoya.xcdatamodel; sourceTree = "<group>"; };
 		256C4F3425D7C1CC0044AEC0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		256C4F3725D7C1CC0044AEC0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		256C4F3925D7C1CC0044AEC0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		256C4F4725D7C23C0044AEC0 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		256C4F4A25D7C8CB0044AEC0 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		256C4F5E25D7DEDF0044AEC0 /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
+		256C4F6125D8C1070044AEC0 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,9 +64,13 @@
 		256C4F2725D7C1CB0044AEC0 /* UberTutorialMoya */ = {
 			isa = PBXGroup;
 			children = (
+				256C4F4425D7C1ED0044AEC0 /* Model */,
+				256C4F4325D7C1EB0044AEC0 /* View */,
+				256C4F4225D7C1EA0044AEC0 /* Controller */,
+				256C4F4125D7C1E90044AEC0 /* Service */,
+				256C4F4025D7C1E40044AEC0 /* Utils */,
 				256C4F2825D7C1CB0044AEC0 /* AppDelegate.swift */,
 				256C4F2A25D7C1CB0044AEC0 /* SceneDelegate.swift */,
-				256C4F2C25D7C1CB0044AEC0 /* ViewController.swift */,
 				256C4F2E25D7C1CB0044AEC0 /* Main.storyboard */,
 				256C4F3425D7C1CC0044AEC0 /* Assets.xcassets */,
 				256C4F3625D7C1CC0044AEC0 /* LaunchScreen.storyboard */,
@@ -68,6 +78,45 @@
 				256C4F3125D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodeld */,
 			);
 			path = UberTutorialMoya;
+			sourceTree = "<group>";
+		};
+		256C4F4025D7C1E40044AEC0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				256C4F4A25D7C8CB0044AEC0 /* Extensions.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		256C4F4125D7C1E90044AEC0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		256C4F4225D7C1EA0044AEC0 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				256C4F4725D7C23C0044AEC0 /* LoginController.swift */,
+				256C4F5E25D7DEDF0044AEC0 /* SignUpController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		256C4F4325D7C1EB0044AEC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				256C4F6125D8C1070044AEC0 /* AuthButton.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		256C4F4425D7C1ED0044AEC0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -140,10 +189,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				256C4F2D25D7C1CB0044AEC0 /* ViewController.swift in Sources */,
+				256C4F4B25D7C8CB0044AEC0 /* Extensions.swift in Sources */,
+				256C4F6225D8C1070044AEC0 /* AuthButton.swift in Sources */,
 				256C4F3325D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodeld in Sources */,
+				256C4F4825D7C23C0044AEC0 /* LoginController.swift in Sources */,
 				256C4F2925D7C1CB0044AEC0 /* AppDelegate.swift in Sources */,
 				256C4F2B25D7C1CB0044AEC0 /* SceneDelegate.swift in Sources */,
+				256C4F5F25D7DEDF0044AEC0 /* SignUpController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
