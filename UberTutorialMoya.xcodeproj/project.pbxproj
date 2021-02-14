@@ -19,6 +19,7 @@
 		256C4F6225D8C1070044AEC0 /* AuthButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F6125D8C1070044AEC0 /* AuthButton.swift */; };
 		256C4F6525D8C5D60044AEC0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 256C4F6425D8C5D60044AEC0 /* GoogleService-Info.plist */; };
 		256C4F7B25D8D9210044AEC0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F7A25D8D9210044AEC0 /* HomeController.swift */; };
+		256C4F7E25D8F4EA0044AEC0 /* LocationInputActivationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 256C4F7D25D8F4EA0044AEC0 /* LocationInputActivationView.swift */; };
 		427321669564F4DB2C2BDB38 /* Pods_UberTutorialMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCBF66EC663494DD71315F7 /* Pods_UberTutorialMoya.framework */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +38,7 @@
 		256C4F6125D8C1070044AEC0 /* AuthButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthButton.swift; sourceTree = "<group>"; };
 		256C4F6425D8C5D60044AEC0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "GoogleService-Info.plist"; sourceTree = SOURCE_ROOT; };
 		256C4F7A25D8D9210044AEC0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		256C4F7D25D8F4EA0044AEC0 /* LocationInputActivationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationInputActivationView.swift; sourceTree = "<group>"; };
 		71404F5B56D862909B0B667A /* Pods-UberTutorialMoya.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberTutorialMoya.release.xcconfig"; path = "Target Support Files/Pods-UberTutorialMoya/Pods-UberTutorialMoya.release.xcconfig"; sourceTree = "<group>"; };
 		E8D3FDC3E3589BAF664AC6AB /* Pods-UberTutorialMoya.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberTutorialMoya.debug.xcconfig"; path = "Target Support Files/Pods-UberTutorialMoya/Pods-UberTutorialMoya.debug.xcconfig"; sourceTree = "<group>"; };
 		EFCBF66EC663494DD71315F7 /* Pods_UberTutorialMoya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberTutorialMoya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				256C4F6125D8C1070044AEC0 /* AuthButton.swift */,
+				256C4F7D25D8F4EA0044AEC0 /* LocationInputActivationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -268,6 +271,7 @@
 				256C4F6225D8C1070044AEC0 /* AuthButton.swift in Sources */,
 				256C4F3325D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodeld in Sources */,
 				256C4F4825D7C23C0044AEC0 /* LoginController.swift in Sources */,
+				256C4F7E25D8F4EA0044AEC0 /* LocationInputActivationView.swift in Sources */,
 				256C4F7B25D8D9210044AEC0 /* HomeController.swift in Sources */,
 				256C4F2925D7C1CB0044AEC0 /* AppDelegate.swift in Sources */,
 				256C4F2B25D7C1CB0044AEC0 /* SceneDelegate.swift in Sources */,
