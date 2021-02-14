@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpController: UIViewController {
     
@@ -68,6 +69,7 @@ class SignUpController: UIViewController {
         let button = AuthButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 20)
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
         return button
     }()
     
@@ -102,6 +104,37 @@ class SignUpController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    @objc func handleSignUp() {
+        // 사용자가 입력한 값들을 안전하게 새로운 객체로 저장
+        guard let email = emailTextField.text else {return}
+        guard let password = passwordTextField.text else {return}
+        guard let fullname = fullnameTextField.text else {return}
+        let accountTypeIndex = accountTypeSegmentedControl.selectedSegmentIndex
+        
+        // 사용자의 정보를 firebase로 보내기 위한 코드
+        Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
+            // 에러 발생시 코드 진행을 멈추기 위한 코드
+            if let error = error {
+                print("Falied to register user with error \(error)")
+                return
+            }
+            
+            guard let uid = result?.user.uid else {return}
+            
+            let values = ["email" : email,
+                          "fullname" : fullname,
+                          "accountType" : accountTypeIndex] as [String : Any]
+            
+            Database.database().reference().child("users").child(uid).updateChildValues(values,
+             withCompletionBlock: { (error, ref) in
+                print("Successfully registered user nad saved data..")
+             })
+            
+            
+        }
+        
+    }
+    
     
     //MARK: - Helpers
     
@@ -121,7 +154,7 @@ class SignUpController: UIViewController {
         stack.axis = .vertical
         stack.distribution = .fillProportionally
         stack.spacing = 24
-        
+         
         view.addSubview(stack)
         stack.anchor(top: titleLabel.bottomAnchor, left: view.leftAnchor, right: view.rightAnchor,
                      paddingTop: 40, paddingLeft: 16, paddingRight: 16)
