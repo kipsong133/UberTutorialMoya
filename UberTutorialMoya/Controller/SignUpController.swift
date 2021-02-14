@@ -127,6 +127,12 @@ class SignUpController: UIViewController {
             
             Database.database().reference().child("users").child(uid).updateChildValues(values,
              withCompletionBlock: { (error, ref) in
+                
+                // 로그인 성공 시, rootViewController == HomeController로 변경하고 MapView를 다시 구현한다음에 LoginController를
+                // dismiss하는 코드
+                guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else {return}
+                controller.configureUI()
+                self.dismiss(animated: true, completion: nil)
                 print("Successfully registered user nad saved data..")
              })
             

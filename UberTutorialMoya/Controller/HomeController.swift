@@ -7,16 +7,19 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 class HomeController: UIViewController {
     
     //MARK: - Properties
     
+    private let mapView = MKMapView() 
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserLoggedIn()
+        
 //        signOut()
         view.backgroundColor = .red
         
@@ -33,11 +36,12 @@ class HomeController: UIViewController {
                 let nav = UINavigationController(rootViewController: LoginController())
                 nav.modalPresentationStyle = .fullScreen
                 self.present(nav, animated: true, completion: nil)
-
             } 
-            
             print("DEBUG: User not logged in..")
+            
         } else {
+            // 만약 로그인 상태라면 맵킷의 맵을 화면에 구현함.
+            configureUI()
             print("DEBUG: User's id is \(Auth.auth().currentUser?.uid)")
         }
     }
@@ -56,6 +60,12 @@ class HomeController: UIViewController {
     
     
     //MARK: - Helpers
+    
+    
+    func configureUI() {
+        view.addSubview(mapView)
+        mapView.frame = view.frame
+    }
     
     
 }
