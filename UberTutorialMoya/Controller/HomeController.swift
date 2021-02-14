@@ -13,12 +13,14 @@ class HomeController: UIViewController {
     
     //MARK: - Properties
     
-    private let mapView = MKMapView() 
+    private let mapView = MKMapView()
+    private let locationManager = CLLocationManager()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         checkIfUserLoggedIn()
+        enableLocationService()
         
 //        signOut()
         view.backgroundColor = .red
@@ -62,10 +64,47 @@ class HomeController: UIViewController {
     //MARK: - Helpers
     
     
+    
     func configureUI() {
         view.addSubview(mapView)
         mapView.frame = view.frame
     }
     
+    
+}
+
+//MARK: - Location Services
+
+extension HomeController: CLLocationManagerDelegate {
+    
+    func enableLocationService() {
+        locationManager.delegate = self
+        
+        switch locationManager.authorizationStatus {    // iOS14로 넘어오면서 변경됨  
+        // "CLLocationManager.authorizationStatus() -> locationManager.authorizationStatus" 로
+        case .notDetermined:
+            print("DEBUG: Not determined..")
+            locationManager.requestWhenInUseAuthorization()
+        case .restricted, .denied:
+            break
+        case .authorizedAlways:
+            print("DEBUG: Auth always...")
+            locationManager.startUpdatingLocation()
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        case .authorizedWhenInUse:
+            locationManager.requestAlwaysAuthorization()
+            print("DEBUG: Auth when in use..")
+        default:
+            break
+        }
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        // 앱을 사용중이 아닌 경우에도 허용할 것인지 사용자에게 물어보는 코드
+        if manager.authorizationStatus == .authorizedWhenInUse {
+            locationManager.requestAlwaysAuthorization()
+        }
+    }
+  
     
 }
