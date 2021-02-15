@@ -25,6 +25,7 @@ struct Service {
         // 아래 코드 설명 (까먹을까봐 메모) 
         // Database에 접속 -> 그중에서 "users" 항목으로 접속 -> 그 중에서 현재 접속한 uid로 접속 -> 그리고 .value로 설정하여 값을 가져오고
         // 그 결과물을 snapshot에 넘김. 그래서 snapshot.value 를 프린트 해보면 uid가 나타나게 됨.
+        
         REF_USERS.child(uid).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             let uid = snapshot.key
@@ -46,7 +47,7 @@ struct Service {
             })
         }
     }
-    
+
     
 }
 

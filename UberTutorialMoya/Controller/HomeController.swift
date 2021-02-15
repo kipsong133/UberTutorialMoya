@@ -10,6 +10,7 @@ import Firebase
 import MapKit
 
 private let reuseIdentifier = "LocationCell"
+private let annotationIdentifer = "DiverAnnotation"
 
 class HomeController: UIViewController {
     
@@ -55,7 +56,25 @@ class HomeController: UIViewController {
             // 지도에 Pin을 생성하기 위한 코드
             guard let coordinate = driver.location?.coordinate else { return }
             let annotation = DriverAnnotation(uid: driver.uid, coordinate: coordinate)
-            self.mapView.addAnnotation(annotation)
+            print("DEBUG: Driver's Coordinate is \(coordinate)")
+            var driverIsVisible: Bool {
+                return self.mapView.annotations.contains(where: { annotation -> Bool in
+                    guard let driverAnno = annotation as? DriverAnnotation else { return false }
+                    
+                    if driverAnno.uid == driver.uid {
+                        // 드라이버의 uid 와 점찍었던 uid가 같다면, 아래 코드를 실행하는 조건절
+                        driverAnno.updateAnnotationPosition(withCoordinate: coordinate)
+                        return true
+                    }
+                    return false 
+                })
+            }
+            
+            if !driverIsVisible {
+                self.mapView.addAnnotation(annotation)    
+            }
+            
+            
         }
     }
     
@@ -121,6 +140,8 @@ class HomeController: UIViewController {
         // 사용자 위치를 표시하는 코드
         mapView.showsUserLocation = true
         mapView.userTrackingMode = .follow
+        mapView.delegate = self
+        
     }
     
     
@@ -157,6 +178,25 @@ class HomeController: UIViewController {
     
     
 }
+
+
+//MARK: - MKMapViewDelegate
+
+extension HomeController: MKMapViewDelegate {
+    
+    // annotation의 이미지를 변경. (PinPoint 이미지 변경코드)
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if let annotation = annotation as? DriverAnnotation {
+            let view = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifer)
+            view.image = #imageLiteral(resourceName: "chevron-sign-to-right")
+            return view
+        }
+        
+        return nil
+    }
+    
+}
+
 
 //MARK: - Location Services
 
