@@ -25,6 +25,7 @@
 		25A7DE8025DA554200B54F9C /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A7DE7F25DA554200B54F9C /* Service.swift */; };
 		25A7DE8325DA602200B54F9C /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A7DE8225DA602200B54F9C /* User.swift */; };
 		25A7DE8625DA6BA800B54F9C /* LocationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A7DE8525DA6BA800B54F9C /* LocationHandler.swift */; };
+		25A7DE8925DA8AB900B54F9C /* DriverAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25A7DE8825DA8AB900B54F9C /* DriverAnnotation.swift */; };
 		427321669564F4DB2C2BDB38 /* Pods_UberTutorialMoya.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFCBF66EC663494DD71315F7 /* Pods_UberTutorialMoya.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +50,7 @@
 		25A7DE7F25DA554200B54F9C /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		25A7DE8225DA602200B54F9C /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		25A7DE8525DA6BA800B54F9C /* LocationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationHandler.swift; sourceTree = "<group>"; };
+		25A7DE8825DA8AB900B54F9C /* DriverAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverAnnotation.swift; sourceTree = "<group>"; };
 		71404F5B56D862909B0B667A /* Pods-UberTutorialMoya.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberTutorialMoya.release.xcconfig"; path = "Target Support Files/Pods-UberTutorialMoya/Pods-UberTutorialMoya.release.xcconfig"; sourceTree = "<group>"; };
 		E8D3FDC3E3589BAF664AC6AB /* Pods-UberTutorialMoya.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UberTutorialMoya.debug.xcconfig"; path = "Target Support Files/Pods-UberTutorialMoya/Pods-UberTutorialMoya.debug.xcconfig"; sourceTree = "<group>"; };
 		EFCBF66EC663494DD71315F7 /* Pods_UberTutorialMoya.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UberTutorialMoya.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				25A7DE8225DA602200B54F9C /* User.swift */,
+				25A7DE8825DA8AB900B54F9C /* DriverAnnotation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -286,6 +289,7 @@
 				256C4F4B25D7C8CB0044AEC0 /* Extensions.swift in Sources */,
 				256C4F6225D8C1070044AEC0 /* AuthButton.swift in Sources */,
 				256C4F3325D7C1CB0044AEC0 /* UberTutorialMoya.xcdatamodeld in Sources */,
+				25A7DE8925DA8AB900B54F9C /* DriverAnnotation.swift in Sources */,
 				256C4F4825D7C23C0044AEC0 /* LoginController.swift in Sources */,
 				25A7DE8625DA6BA800B54F9C /* LocationHandler.swift in Sources */,
 				25A7DE7A25DA314700B54F9C /* LocationInputView.swift in Sources */,

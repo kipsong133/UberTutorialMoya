@@ -33,20 +33,32 @@ class HomeController: UIViewController {
         checkIfUserLoggedIn()
         enableLocationService()
         fetchUserData()
-        
-//        signOut()
+        fetchDrivers()
         view.backgroundColor = .red
         
     }
     
     //MARK: - API
     
-    /* 사용자 정보 fectch 메소드 */
+    /* 사용자 정보 fectch 메소드 */ 
     func fetchUserData() {
-        Service.shared.fetchUserData { (user) in
+        guard let currentUid = Auth.auth().currentUser?.uid else { return }
+        Service.shared.fetchUserData(uid: currentUid) { (user) in 
             self.user = user
         }
     }
+    
+    func fetchDrivers() {
+        guard let location = locationManager?.location else { return }
+        Service.shared.fetchDrivers(location: location) { (driver) in
+            
+            // 지도에 Pin을 생성하기 위한 코드
+            guard let coordinate = driver.location?.coordinate else { return }
+            let annotation = DriverAnnotation(uid: driver.uid, coordinate: coordinate)
+            self.mapView.addAnnotation(annotation)
+        }
+    }
+    
     
     
     /* 로그인상태인지 아닌지 확인하는 메소드 */
