@@ -16,7 +16,7 @@ struct Service {
     static let shared = Service()
     let currentUid = Auth.auth().currentUser?.uid   // 모든 유저의 정보를 가져오지 않기 위한 코드
     
-    func fetchUserData() {
+    func fetchUserData(completion: @escaping(String) -> Void) {
         print("DEBUG: Current uid is \(currentUid!)")
         
         // 아래 코드 설명 (까먹을까봐 메모)
@@ -25,9 +25,8 @@ struct Service {
         REF_USERS.child(currentUid!).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
             guard let fullname = dictionary["fullname"] as? String else { return }
-            print("DEBUG: \(fullname)")
             
-            
+            completion(fullname)
         }
     }
 }
