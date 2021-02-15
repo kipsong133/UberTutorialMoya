@@ -16,17 +16,15 @@ struct Service {
     static let shared = Service()
     let currentUid = Auth.auth().currentUser?.uid   // 모든 유저의 정보를 가져오지 않기 위한 코드
     
-    func fetchUserData(completion: @escaping(String) -> Void) {
-        print("DEBUG: Current uid is \(currentUid!)")
-        
+    func fetchUserData(completion: @escaping(User) -> Void) {
+        print("DEBUG: Current uid is \(currentUid!)")        
         // 아래 코드 설명 (까먹을까봐 메모)
         // Database에 접속 -> 그중에서 "users" 항목으로 접속 -> 그 중에서 현재 접속한 uid로 접속 -> 그리고 .value로 설정하여 값을 가져오고
         // 그 결과물을 snapshot에 넘김. 그래서 snapshot.value 를 프린트 해보면 uid가 나타나게 됨.
         REF_USERS.child(currentUid!).observeSingleEvent(of: .value) { (snapshot) in
             guard let dictionary = snapshot.value as? [String: Any] else { return }
-            guard let fullname = dictionary["fullname"] as? String else { return }
-            
-            completion(fullname)
+            let user = User(dictionary: dictionary)
+            completion(user)
         }
     }
 }
