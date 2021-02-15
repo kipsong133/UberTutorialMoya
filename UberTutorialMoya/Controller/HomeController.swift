@@ -33,9 +33,8 @@ class HomeController: UIViewController {
         super.viewDidLoad()
         checkIfUserLoggedIn()
         enableLocationService()
-        fetchUserData()
-        fetchDrivers()
-        view.backgroundColor = .red
+  
+//        signOut()
         
     }
     
@@ -94,8 +93,7 @@ class HomeController: UIViewController {
             
         } else {
             // 만약 로그인 상태라면 맵킷의 맵을 화면에 구현함.
-            configureUI()
-            print("DEBUG: User's id is \(Auth.auth().currentUser?.uid)")
+            configure()
         }
     }
     
@@ -114,6 +112,13 @@ class HomeController: UIViewController {
     
     
     //MARK: - Helpers
+    
+    func configure() {
+        configureUI()
+        fetchUserData()
+        fetchDrivers()
+    }
+    
     
     func configureUI() {
         configureMapView()
