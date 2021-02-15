@@ -9,6 +9,7 @@ import Firebase
 
 let DB_REF = Database.database().reference()    //  Firebase에 접속하는 코드라고 생각하면됨.
 let REF_USERS = DB_REF.child("users")
+let REF_DRIVER_LOCATIONS = DB_REF.child("driver-locations")
 
 struct Service {
     // 네트워크 통신을 구현하는 데 Service가 싱글톤으로 구성되는 것이 적합.

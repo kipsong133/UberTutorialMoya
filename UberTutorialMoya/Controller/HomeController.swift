@@ -16,7 +16,7 @@ class HomeController: UIViewController {
     //MARK: - Properties
     
     private let mapView = MKMapView()
-    private let locationManager = CLLocationManager()
+    private let locationManager = LocationHandler.shared.locationManager
     private let inputActivationView =  LocationInputActivationView()
     private let locationInputView = LocationInputView()
     private let tableView = UITableView()
@@ -147,38 +147,30 @@ class HomeController: UIViewController {
 
 //MARK: - Location Services
 
-extension HomeController: CLLocationManagerDelegate {
+extension HomeController {
     
     func enableLocationService() {
-        locationManager.delegate = self
         
-        switch locationManager.authorizationStatus {    // iOS14로 넘어오면서 변경됨  
+        switch locationManager?.authorizationStatus {    // iOS14로 넘어오면서 변경됨  
         // "CLLocationManager.authorizationStatus() -> locationManager.authorizationStatus" 로
         case .notDetermined:
             print("DEBUG: Not determined..")
-            locationManager.requestWhenInUseAuthorization()
+            locationManager?.requestWhenInUseAuthorization()
         case .restricted, .denied:
             break
         case .authorizedAlways:
             print("DEBUG: Auth always...")
-            locationManager.startUpdatingLocation()
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            locationManager?.startUpdatingLocation()
+            locationManager?.desiredAccuracy = kCLLocationAccuracyBest
         case .authorizedWhenInUse:
-            locationManager.requestAlwaysAuthorization()
+            locationManager?.requestAlwaysAuthorization()
             print("DEBUG: Auth when in use..")
         default:
             break
         }
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        // iOS 14로 넘어오면서 매소드가 변경된 부분임.
-        // 기존 : locationManager(_ manager:didChagneAuthorization status:)
-        // 앱을 사용중이 아닌 경우에도 허용할 것인지 사용자에게 물어보는 코드
-        if manager.authorizationStatus == .authorizedWhenInUse {
-            locationManager.requestAlwaysAuthorization()
-        }
-    }
+
   
     
 }
