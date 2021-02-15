@@ -13,6 +13,8 @@ class SignUpController: UIViewController {
     
     //MARK: - Properties
     
+    private var location = LocationHandler.shared.locationManager.location
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "UBER"
@@ -96,7 +98,7 @@ class SignUpController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureUI()
-        
+
     }
     
     //MARK: - Actions
@@ -122,37 +124,38 @@ class SignUpController: UIViewController {
             
             guard let uid = result?.user.uid else {return}
             
-            if accountTypeIndex == 1 {
-                var geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
-//                geofire.setLocation(<#T##location: CLLocation##CLLocation#>, forKey: uid) { (error) in
-//                    // do stuff in here
-//                }    
-            }
-            
-            
-            
             let values = ["email" : email,
                           "fullname" : fullname,
                           "accountType" : accountTypeIndex] as [String : Any]
             
-            REF_USERS.child(uid).updateChildValues(values,
-             withCompletionBlock: { (error, ref) in
+            if accountTypeIndex == 1 {
+                let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
+                guard let location = self.location else { return }
                 
-                // 로그인 성공 시, rootViewController == HomeController로 변경하고 MapView를 다시 구현한다음에 LoginController를
-                // dismiss하는 코드
-                guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else {return}
-                controller.configureUI()
-                self.dismiss(animated: true, completion: nil)
-                print("Successfully registered user nad saved data..")
-             })
-            
-            
+                geofire.setLocation(location, forKey: uid) { (error) in
+                    self.uploadUserDataAndShowHomeController(uid: uid, values: values)
+                }     
+            }
+            self.uploadUserDataAndShowHomeController(uid: uid, values: values)
         }
-        
     }
     
     
     //MARK: - Helpers
+    
+    func uploadUserDataAndShowHomeController(uid: String, values: [String: Any]) {
+        REF_USERS.child(uid).updateChildValues(values,
+         withCompletionBlock: { (error, ref) in
+            // 로그인 성공 시, rootViewController == HomeController로 변경하고 MapView를 다시 구현한다음에 LoginController를
+            // dismiss하는 코드
+            guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else {return}
+            controller.configureUI()
+            self.dismiss(animated: true, completion: nil)
+            print("Successfully registered user nad saved data..")
+         })
+    }
+    
+    
     
     func configureUI() {
         
