@@ -63,14 +63,18 @@ class HomeController: UIViewController {
         switch actionButtonConfig {
         case .showMenu:
             print("DEBUG: Handle show menu..")
-        case .dissmissActionView:
-            print("DEBUG: Handle dismissal..")
+        case .dissmissActionView:      
+            // 아래 코드를 통해서 뒤로가기를 누르면 annotation(핀포인트)를 제거할 수 있음.
+            mapView.annotations.forEach { (annotation) in
+                if let anno = annotation as? MKPointAnnotation {
+                    mapView.removeAnnotation(anno)
+                }
+            }
             
             // 검색화면에서 한번 뒤로가기 클릭하면 다시 원래 이미지인 .showMenu로 돌아오록 처리한 코드
             UIView.animate(withDuration: 0.3) { 
                 self.inputActivationView.alpha = 1
-                self.actionButton.setImage(#imageLiteral(resourceName: "baseline_menu_black_36dp").withRenderingMode(.alwaysOriginal), for: .normal)
-                self.actionButtonConfig = .showMenu
+                self.configureActionButton(config: .showMenu)
             }
         }
     }
@@ -155,6 +159,18 @@ class HomeController: UIViewController {
         configureUI()
         fetchUserData()
         fetchDrivers()
+    }
+    
+    fileprivate func configureActionButton(config: ActionButtonConfiguration) { // ActionButtonConfiguration이 private이라서 
+                                                                                // fileprivate을 붙여야함.
+        switch config {
+        case .showMenu:
+            self.actionButton.setImage(#imageLiteral(resourceName: "baseline_menu_black_36dp").withRenderingMode(.alwaysOriginal), for: .normal)
+            self.actionButtonConfig = .showMenu
+        case .dissmissActionView:
+            actionButton.setImage(#imageLiteral(resourceName: "baseline_arrow_back_black_36dp").withRenderingMode(.alwaysOriginal), for: .normal)
+            actionButtonConfig = .dissmissActionView
+        }
     }
     
     
@@ -372,8 +388,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         // 사용자가 선택한 목적지에 PinPoint가 찍히도록 하는 코드
         let selectedPlacemark = searchResult[indexPath.row]
         
-        actionButton.setImage(#imageLiteral(resourceName: "baseline_arrow_back_black_36dp").withRenderingMode(.alwaysOriginal), for: .normal)
-        actionButtonConfig = .dissmissActionView
+        configureActionButton(config: .dissmissActionView)
         
         dissmissLocationView { (_) in
             let annotation = MKPointAnnotation()
