@@ -266,9 +266,14 @@ class HomeController: UIViewController {
     }
     
     // confirm view가 Bool 값에 따라서 위치를 변경할 수 있도록 처리한 메소드
-    func animateRideActionView(shouldShow: Bool) {
+    func animateRideActionView(shouldShow: Bool, destination: MKPlacemark? = nil) {
         let yOrigin = shouldShow ? self.view.frame.height - self.rideActionViewHeight : self.view.frame.height
     
+        if shouldShow {
+            guard let destination = destination else { return }
+            rideActionView.destination = destination
+        }
+        
         UIView.animate(withDuration: 0.3) { 
             self.rideActionView.frame.origin.y = yOrigin
         }
@@ -480,7 +485,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             
             self.mapView.showAnnotations(annotations, animated: true)
             
-            self.animateRideActionView(shouldShow: true)
+            self.animateRideActionView(shouldShow: true, destination: selectedPlacemark)
+            
         }
     }
     
