@@ -43,11 +43,22 @@ class HomeController: UIViewController {
         didSet {                // didSet을 통해서 정보를 넘겨줌과 동시에, accountType에 따라서 fetch하는 메소드를 구분하고있습니다.
             locationInputView.user = user 
             if user?.accountType == .passenger {
+                print("DEBUG: Logged in Passenger")
                 fetchDrivers()
                 configureLocationInputActivationView()
-            } 
+            } else {
+                print("DEBUG: Logged in Driver")
+                observeTrips()
+            }
         }
     } 
+    
+    private var trip: Trip? {
+        didSet {
+            print("DEBUG: show pickup passenger controller..")
+        }
+    }
+    
     
     private let actionButton: UIButton = {
         let button = UIButton(type: .system)
@@ -128,6 +139,12 @@ class HomeController: UIViewController {
             }
             
             
+        }
+    }
+    
+    func observeTrips() {
+        Service.shared.observeTrips { (trip) in
+            self.trip = trip
         }
     }
     

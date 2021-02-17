@@ -150,7 +150,7 @@ class SignUpController: UIViewController {
             // dismiss하는 코드
             guard let controller = UIApplication.shared.keyWindow?.rootViewController as? HomeController else {return}
             controller.configure()
-            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)  
             print("Successfully registered user nad saved data..")
          })
     }
