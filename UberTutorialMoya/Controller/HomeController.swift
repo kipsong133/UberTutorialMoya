@@ -39,8 +39,14 @@ class HomeController: UIViewController {
     private var actionButtonConfig = ActionButtonConfiguration()
     private var route: MKRoute?
 
-    private var user: User? {
-        didSet { locationInputView.user = user }
+    private var user: User? {   // 사용자에 대한 정보가 변경되었다면, "locationInputView"의 데이터를  변경해주는 didSet 변수입니다.
+        didSet {                // didSet을 통해서 정보를 넘겨줌과 동시에, accountType에 따라서 fetch하는 메소드를 구분하고있습니다.
+            locationInputView.user = user 
+            if user?.accountType == .passenger {
+                fetchDrivers()
+                configureLocationInputActivationView()
+            } 
+        }
     } 
     
     private let actionButton: UIButton = {
@@ -164,7 +170,7 @@ class HomeController: UIViewController {
     func configure() {
         configureUI()
         fetchUserData()
-        fetchDrivers()
+//        fetchDrivers()
     }
     
     fileprivate func configureActionButton(config: ActionButtonConfiguration) { // ActionButtonConfiguration이 private이라서 
@@ -187,7 +193,12 @@ class HomeController: UIViewController {
         view.addSubview(actionButton)
         actionButton.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor,
                             paddingTop: 16, paddingLeft: 20, width: 30, height: 30)
-        
+        configureTableView()
+
+    }
+    
+    // 홈화면에서 상단에 생기는 "Where to" 라고 적힌 view를 생성해주는 메소드.
+    func configureLocationInputActivationView() {
         view.addSubview(inputActivationView)
         inputActivationView.centerX(inView: view)
         inputActivationView.setDimensions(height: 50, width: view.frame.width - 64)
@@ -198,10 +209,8 @@ class HomeController: UIViewController {
         UIView.animate(withDuration: 2) { 
             self.inputActivationView.alpha = 1
         }
-        
-        configureTableView()
-
     }
+    
     
     func configureMapView() {
         view.addSubview(mapView)

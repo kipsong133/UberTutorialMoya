@@ -4,10 +4,14 @@
 //
 //  Created by 김우성 on 2021/02/15.
 //
+// Firebase에 데이터 송수신에 관련된 메소드를 구현한 파일입니다.
+
+
 
 import Firebase
 import GeoFire
 
+// Firebase에 table로 이동하는 경로를 저장한 상수.
 let DB_REF = Database.database().reference()    //  Firebase에 접속하는 코드라고 생각하면됨.
 let REF_USERS = DB_REF.child("users")
 let REF_DRIVER_LOCATIONS = DB_REF.child("driver-locations")
@@ -19,6 +23,7 @@ struct Service {
     static let shared = Service()
     
     
+    // 유저가 가입하면 그 정보를 table에 추가하는 메소드.
     func fetchUserData(uid: String, completion: @escaping(User) -> Void) {
 //        guard let currentUid = Auth.auth().currentUser?.uid else { return } // 모든 유저의 정보를 가져오지 않기 위한 코드
 //        print("DEBUG: Current uid is \(currentUid)")        
@@ -35,6 +40,7 @@ struct Service {
         }
     }
     
+    // 운전자로 등록했을 때, 데이터를 fetch 하기 위한 메소드.
     func fetchDrivers(location: CLLocation, completion: @escaping (User)-> Void) {
         let geofire = GeoFire(firebaseRef: REF_DRIVER_LOCATIONS)
         
@@ -49,6 +55,7 @@ struct Service {
         }
     }
     
+    // 운전자와 탑승자의 위치정보를 모두 테이블에 업로드하기 위한 메소드.
     func uploadTrip(_ pickupCoordinates: CLLocationCoordinate2D, _ destinationCoordinates: CLLocationCoordinate2D,
                     completion: @escaping(Error?, DatabaseReference) -> Void) {
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -57,7 +64,8 @@ struct Service {
         let destinationArray = [destinationCoordinates.latitude, destinationCoordinates.longitude]
         
         let values = ["pickupCoordinates": pickupArray,
-                     "destinationCoordinates": destinationArray]
+                     "destinationCoordinates": destinationArray,
+                     "state": TripState.requested.rawValue] as [String : Any]
         
         REF_TRIPS.child(uid).updateChildValues(values, withCompletionBlock: completion)
         
