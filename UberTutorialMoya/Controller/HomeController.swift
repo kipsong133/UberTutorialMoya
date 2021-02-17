@@ -64,14 +64,19 @@ class HomeController: UIViewController {
         switch actionButtonConfig {
         case .showMenu:
             print("DEBUG: Handle show menu..")
-        case .dissmissActionView:      
+        case .dissmissActionView: 
+            // 핀포인트를 제거해주는 커스텀메소드
             removeAnnotationsAndOverlays()
+            // 검색한 이후 뒤로가거버튼을 눌렀을 때, 아래코드가 호출됨. 경로에 Zoom-In된 것을 Zoom-Out해줌.
+            mapView.showAnnotations(mapView.annotations, animated: true)
             
             // 검색화면에서 한번 뒤로가기 클릭하면 다시 원래 이미지인 .showMenu로 돌아오록 처리한 코드
             UIView.animate(withDuration: 0.3) { 
                 self.inputActivationView.alpha = 1
                 self.configureActionButton(config: .showMenu)
             }
+            
+
         }
     }
     
@@ -431,6 +436,7 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
         // 사용자가 선택한 목적지에 PinPoint가 찍히도록 하는 코드
         let selectedPlacemark = searchResult[indexPath.row]
         
+        
         configureActionButton(config: .dissmissActionView)
         
         let destination = MKMapItem(placemark: selectedPlacemark)
@@ -442,6 +448,12 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             annotation.coordinate = selectedPlacemark.coordinate
             self.mapView.addAnnotation(annotation)
             self.mapView.selectAnnotation(annotation, animated: true)   // PinPoint가 커지도록 하는 코드
+            
+            // 운전자가 아닌 핀포인트(Annotation)을 찾아서 상수에 할당.
+            // 짧은 코드를 통해서 annotations 중에서 출발점을 찾게된 것이고 최 하단에 있는 ShowAnnotation에서 zoom in 해준다.
+            let annotations = self.mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
+            
+            self.mapView.showAnnotations(annotations, animated: true)
         }
     }
     
