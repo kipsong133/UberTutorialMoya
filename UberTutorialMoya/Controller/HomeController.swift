@@ -35,6 +35,7 @@ class HomeController: UIViewController {
     private let tableView = UITableView()
     private var searchResult = [MKPlacemark]()
     private final let locationInputViewHeight: CGFloat = 200
+    private final let rideActionViewHeight: CGFloat = 300
     private var actionButtonConfig = ActionButtonConfiguration()
     private var route: MKRoute?
 
@@ -76,6 +77,8 @@ class HomeController: UIViewController {
             UIView.animate(withDuration: 0.3) { 
                 self.inputActivationView.alpha = 1
                 self.configureActionButton(config: .showMenu)
+                self.animateRideActionView(shouldShow: false)
+
             }
             
 
@@ -229,8 +232,8 @@ class HomeController: UIViewController {
     
     func configureRideActionView() {
         view.addSubview(rideActionView)
-        rideActionView.frame = CGRect(x: 0, y: view.frame.height - 300,
-                                      width: view.frame.width, height: 300)
+        rideActionView.frame = CGRect(x: 0, y: view.frame.height,
+                                      width: view.frame.width, height: rideActionViewHeight)
 
     }
     
@@ -261,6 +264,16 @@ class HomeController: UIViewController {
             self.locationInputView.removeFromSuperview() //  뷰가 많이 있을 때 한 번에 제거해주는 메소드
         }, completion: completion)
     }
+    
+    // confirm view가 Bool 값에 따라서 위치를 변경할 수 있도록 처리한 메소드
+    func animateRideActionView(shouldShow: Bool) {
+        let yOrigin = shouldShow ? self.view.frame.height - self.rideActionViewHeight : self.view.frame.height
+    
+        UIView.animate(withDuration: 0.3) { 
+            self.rideActionView.frame.origin.y = yOrigin
+        }
+    }
+    
     
 }
 
@@ -466,6 +479,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             let annotations = self.mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
             
             self.mapView.showAnnotations(annotations, animated: true)
+            
+            self.animateRideActionView(shouldShow: true)
         }
     }
     
