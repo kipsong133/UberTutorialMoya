@@ -163,3 +163,20 @@ extension MKPlacemark {
         }
     }
 }
+
+extension MKMapView {
+    
+    // annotations(출발지와 목적지)에 대한 값을 받으면 그 값에 맞는 지도 Focusing을 처리해주는 커스텀 메소드
+    func zoomToFit(annotations: [MKAnnotation]) {
+        var zoomRect = MKMapRect.null
+        
+        annotations.forEach { (annotation) in
+            let annotationPoint = MKMapPoint(annotation.coordinate)
+            let pointRect = MKMapRect(x: annotationPoint.x, y: annotationPoint.y,
+                                      width: 0.01, height: 0.01)
+            zoomRect = zoomRect.union(pointRect)
+        }
+        let insets = UIEdgeInsets(top: 100, left: 100, bottom: 250, right: 100) // 여기 값을 조정하여 확대대는 지도의 크기를 조절할 수 있음.
+        setVisibleMapRect(zoomRect, edgePadding: insets, animated: true)
+    }
+}

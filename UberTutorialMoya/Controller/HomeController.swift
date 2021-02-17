@@ -482,8 +482,8 @@ extension HomeController: UITableViewDelegate, UITableViewDataSource {
             // 운전자가 아닌 핀포인트(Annotation)을 찾아서 상수에 할당.
             // 짧은 코드를 통해서 annotations 중에서 출발점을 찾게된 것이고 최 하단에 있는 ShowAnnotation에서 zoom in 해준다.
             let annotations = self.mapView.annotations.filter({ !$0.isKind(of: DriverAnnotation.self) })
-            
-            self.mapView.showAnnotations(annotations, animated: true)
+            self.mapView.zoomToFit(annotations: annotations)    // zoomToFit 메소드는 적절한 크기로 조정한 후 zoom in 해주는 커스텀메소드임.
+                                                                // extension을 통해 추가했음.
             
             self.animateRideActionView(shouldShow: true, destination: selectedPlacemark)
             
